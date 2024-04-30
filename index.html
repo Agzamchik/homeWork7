@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Угадай число</title>
+    <style>
+        .hint {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Угадай число от 1 до 100</h1>
+<input type="number" id="userInput" min="1" max="100">
+<button onclick="checkNumber()">Проверить</button>
+<div class="hint" id="hintText"></div>
+
+<script>
+    function getRandomNumber() {
+        return Math.floor(Math.random() * 100) + 1;
+    }
+
+    let randomNumber = getRandomNumber();
+    let attempts = 0;
+
+    function checkNumber() {
+        const userInput = document.getElementById('userInput').value;
+        const hintText = document.getElementById('hintText');
+        const parsedInput = parseInt(userInput);
+
+        if (isNaN(parsedInput) || parsedInput < 1 || parsedInput > 100) {
+            hintText.innerText = "Пожалуйста, введите число от 1 до 100.";
+            hintText.style.color = "black";
+        } else if (parsedInput < randomNumber) {
+            hintText.innerText = "Загаданное число больше.";
+            hintText.style.color = "green";
+            attempts++;
+        } else if (parsedInput > randomNumber) {
+            hintText.innerText = "Загаданное число меньше.";
+            hintText.style.color = "red";
+            attempts++;
+        } else {
+            attempts++;
+            hintText.innerText = `Вы угадали! Количество попыток: ${attempts}`;
+            hintText.style.color = "blue";
+            document.getElementById('userInput').setAttribute('disabled', 'disabled');
+        }
+    }
+</script>
+</body>
+</html>
+
+</body>
+<script src="app.js"></script>
+</html>
